@@ -1,0 +1,24 @@
+/CHANGES/1.9/Tue Feb  3 11:41:35 2004//
+/COPYING/1.1.1.1/Tue Feb  3 08:50:14 2004//
+/INSTALL/1.4/Tue Feb  3 10:10:55 2004//
+/INSTALL.win32/1.1.1.1/Tue Feb  3 10:12:47 2004//
+/Make.def.base/1.1.1.1/Tue Feb  3 10:09:22 2004//
+/Makefile/1.10/Tue Feb  3 11:41:35 2004//
+/Makefile.mak/1.1.1.2/Tue Feb  3 10:36:42 2004//
+/README/1.1.1.3/Tue Feb  3 10:12:47 2004//
+/README.html/1.8/Tue Feb  3 10:44:16 2004//
+/TODO/1.1.1.2/Tue Feb  3 10:12:47 2004//
+/configure/1.1.1.3/Tue Feb  3 10:36:42 2004//
+/qp.cc/1.1.1.4/Tue Feb  3 10:36:42 2004//
+/qp_base.cc/1.1.1.5/Tue Feb  3 10:36:42 2004//
+/qp_misc.cc/1.3/Tue Feb  3 10:44:16 2004//
+/qp_pthread_rwlock.h/1.1.1.2/Tue Feb  3 10:12:47 2004//
+/qp_rwlock.cc/1.1.1.2/Tue Feb  3 10:36:42 2004//
+/qp_synch.cc/1.1.1.6/Tue Feb  3 10:36:42 2004//
+/qp_thr.cc/1.1.1.7/Tue Feb  3 10:46:35 2004//
+/qp_timer.cc/1.1.1.6/Tue Feb  3 10:36:42 2004//
+/rpm.spec/1.1.1.5/Tue Feb  3 10:46:35 2004//
+D/arch////
+D/ex////
+D/qpthr////
+/qp_sig.cc/1.2/Tue Sep  7 12:21:10 2004//
