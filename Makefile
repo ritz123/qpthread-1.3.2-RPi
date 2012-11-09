@@ -105,6 +105,21 @@ INSTALL=/usr/bin/install
 endif
 
 #
+# Linux armv6l, EGCS
+#
+ifeq ($(DEST), Linux_Armv6l)
+LIBNAME=$(LIBNAME_BASE).$(MAJOR_VERSION).$(MINOR_VERSION).$(RELEASE_VERSION)
+LDFLAGS=-shared -Wl,-soname,$(LIBNAME_BASE).$(MAJOR_VERSION)
+LDLIBS=
+CFLAGS=$(DEBUG_FL) -fPIC -Wall -O2 -D_REENTRANT -D_XOPEN_SOURCE=500 -D_SVID_SOURCE \
+		-DLINUX -I.
+ARCH_OBJ=
+CXX=g++
+CXXLD=g++
+INSTALL=/usr/bin/install
+endif
+
+#
 # Linux Other, EGCS
 #
 ifeq ($(DEST), Linux_Other)
@@ -247,7 +262,27 @@ ifeq ($(DEST), OSF1_Alpha)
 
 	$(INSTALL) -m 0644 -f $(INST_PREFIX)/lib $(LIBNAME_S)
 endif
-	
+ifeq ($(DEST), Linux_Armv6l)
+	$(INSTALL) -d $(INST_PREFIX)/include/qpthr $(INST_PREFIX)/lib
+	$(INSTALL) -m 0644 qpthr/*.h    $(INST_PREFIX)/include/qpthr
+	$(INSTALL) -m 0755 $(LIBNAME)  $(INST_PREFIX)/lib
+
+	ln -sf $(LIBNAME) $(INST_PREFIX)/lib/$(LIBNAME_BASE)
+	ln -sf $(LIBNAME) $(INST_PREFIX)/lib/$(LIBNAME_BASE).$(MAJOR_VERSION)
+
+	$(INSTALL) -m 0644 $(LIBNAME_S)  $(INST_PREFIX)/lib
+endif
+ifeq ($(DEST), Linux_Other)
+	$(INSTALL) -d $(INST_PREFIX)/include/qpthr $(INST_PREFIX)/lib
+	$(INSTALL) -m 0644 qpthr/*.h    $(INST_PREFIX)/include/qpthr
+	$(INSTALL) -m 0755 $(LIBNAME)  $(INST_PREFIX)/lib
+
+	ln -sf $(LIBNAME) $(INST_PREFIX)/lib/$(LIBNAME_BASE)
+	ln -sf $(LIBNAME) $(INST_PREFIX)/lib/$(LIBNAME_BASE).$(MAJOR_VERSION)
+
+	$(INSTALL) -m 0644 $(LIBNAME_S)  $(INST_PREFIX)/lib
+endif
+
 
 
 

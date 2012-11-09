@@ -12,6 +12,8 @@ if [ $OS = "Linux" ]; then
 		DEST=Linux_Alpha
 	elif echo $HW | egrep -i 'sparc' >/dev/null; then
 		DEST=Linux_Sparc
+	elif echo $HW | egrep -i 'armv6l' >/dev/null; then
+		DEST=Linux_Armv6l
 	else
 		DEST=Linux_Other
 	fi
