@@ -98,7 +98,7 @@ LIBNAME=$(LIBNAME_BASE).$(MAJOR_VERSION).$(MINOR_VERSION).$(RELEASE_VERSION)
 LDFLAGS=-shared -Wl,-soname,$(LIBNAME_BASE).$(MAJOR_VERSION)
 LDLIBS=
 CFLAGS=$(DEBUG_FL) -fPIC -Wall -O2 -D_REENTRANT -D_XOPEN_SOURCE=500 -D_SVID_SOURCE \
-m 		-DARCH_TAS -DLINUX -I. -fhandle-exceptions
+ 		-DARCH_TAS -DLINUX -I. -fhandle-exceptions
 ARCH_OBJ=arch/alpha/spinlock_gnu.o
 CXX=g++
 CXXLD=g++
@@ -211,10 +211,6 @@ ifeq ($(DEST), Solaris_Intel)
 #	ranlib $@
 	$(CXX) $(LDFLAGS) -o $@ $<
 endif
-ifeq ($(DEST), Solaris_x86_64)
-	$(CXX) $(LDFLAGS) -o $@ $<
-endif
-
 ifeq ($(DEST), OSF1_Alpha)
 	find cxx_repository \( -type f -a -name \*.o \) -print >/tmp/templates.oo
 	ar -rs $@ `cat /tmp/templates.oo`
