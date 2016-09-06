@@ -24,6 +24,6 @@ STL_INC=../STLport-3.12.3/stl
 
 
 ###### Install directory if installed with make install
-INST_PREFIX=/usr/local
+INST_PREFIX?=/usr/local
 
 #############################################

@@ -75,6 +75,22 @@ INSTALL=/usr/bin/install
 endif
 
 #
+# Linux x86_64, EGCS
+#
+ifeq ($(DEST), Linux_x86_64)
+LIBNAME=$(LIBNAME_BASE).$(MAJOR_VERSION).$(MINOR_VERSION).$(RELEASE_VERSION)
+LDFLAGS=-shared -Wl,-soname,$(LIBNAME_BASE).$(MAJOR_VERSION)
+LDLIBS=
+CFLAGS=$(DEBUG_FL) -fPIC -Wall -O2 -D_REENTRANT -D_XOPEN_SOURCE=500 -D_SVID_SOURCE \
+		-DARCH_TAS -DLINUX -I.
+ARCH_OBJ=arch/x86_64/spinlock_gnu.o
+CXX=g++
+CXXLD=g++
+INSTALL=/usr/bin/install
+endif
+
+
+#
 # Linux Alpha, EGCS
 #
 ifeq ($(DEST), Linux_Alpha)
@@ -82,7 +98,7 @@ LIBNAME=$(LIBNAME_BASE).$(MAJOR_VERSION).$(MINOR_VERSION).$(RELEASE_VERSION)
 LDFLAGS=-shared -Wl,-soname,$(LIBNAME_BASE).$(MAJOR_VERSION)
 LDLIBS=
 CFLAGS=$(DEBUG_FL) -fPIC -Wall -O2 -D_REENTRANT -D_XOPEN_SOURCE=500 -D_SVID_SOURCE \
-		-DARCH_TAS -DLINUX -I. -fhandle-exceptions
+m 		-DARCH_TAS -DLINUX -I. -fhandle-exceptions
 ARCH_OBJ=arch/alpha/spinlock_gnu.o
 CXX=g++
 CXXLD=g++
@@ -195,6 +211,10 @@ ifeq ($(DEST), Solaris_Intel)
 #	ranlib $@
 	$(CXX) $(LDFLAGS) -o $@ $<
 endif
+ifeq ($(DEST), Solaris_x86_64)
+	$(CXX) $(LDFLAGS) -o $@ $<
+endif
+
 ifeq ($(DEST), OSF1_Alpha)
 	find cxx_repository \( -type f -a -name \*.o \) -print >/tmp/templates.oo
 	ar -rs $@ `cat /tmp/templates.oo`
@@ -228,6 +248,17 @@ ifeq ($(DEST), Linux_Intel)
 
 	$(INSTALL) -m 0644 $(LIBNAME_S)  $(INST_PREFIX)/lib
 endif
+ifeq ($(DEST), Linux_x86_64)
+	$(INSTALL) -d $(INST_PREFIX)/include/qpthr $(INST_PREFIX)/lib
+	$(INSTALL) -m 0644 qpthr/*.h    $(INST_PREFIX)/include/qpthr
+	$(INSTALL) -m 0755 $(LIBNAME)  $(INST_PREFIX)/lib
+
+	ln -sf $(LIBNAME) $(INST_PREFIX)/lib/$(LIBNAME_BASE)
+	ln -sf $(LIBNAME) $(INST_PREFIX)/lib/$(LIBNAME_BASE).$(MAJOR_VERSION)
+
+	$(INSTALL) -m 0644 $(LIBNAME_S)  $(INST_PREFIX)/lib
+endif
+
 ifeq ($(DEST), FreeBSD_Intel)
 	$(INSTALL) -d $(INST_PREFIX)/include/qpthr $(INST_PREFIX)/lib
 	$(INSTALL) -C -m 0644 qpthr/*.h    $(INST_PREFIX)/include/qpthr
